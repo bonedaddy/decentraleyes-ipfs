@@ -1,35 +1,30 @@
-Decentraleyes (Experimental)
+Decentraleyes (Chromium)
 =============
 
-A reimplementation of current features of Decentraleyes. This project will help bring Decentraleyes to WebExtensions (Firefox 57 and higher), as well as Chromium-based browsers, Opera, and possibly even Edge.
+A [web browser extension](https://decentraleyes.org) that emulates Content Delivery Networks to improve your online privacy. It intercepts traffic, finds supported resources locally, and injects them into the environment. All of this happens automatically, so no prior configuration is required. Feel free to use the following [testing utility](https://decentraleyes.org/test/) to find out if you are properly protected. For more information, please read this [basic introduction](https://git.synz.io/Synzvato/decentraleyes/wikis/Simple-Introduction).
 
-## Changelog
+> **Note:** Decentraleyes is no silver bullet, but it does prevent a lot of websites from making you send these kinds of requests. Ultimately, you can make Decentraleyes block requests for any missing CDN resources, too.
 
-Below is a list of all notable changes made to the reimplementation project to date. This includes, but is most certainly not limited to, records of changes such as bug fixes, and new, removed, and updated features.
+## Contributing Code
 
-### v1.3.7.5
+Suggestions in the form of **Issues**, and contributions in the form of **Merge Requests**, are highly welcome. Code **Forks** can be requested from within issues, or via email. You can use the contact details and public PGP key on the extension's [contact page](https://decentraleyes.org/contact/) to get in touch.
 
-* Fix Subresource Integrity (SRI) validation issues.
-* Implement context stripping for allowed CDN requests.
-* Implement request filters to improve performance.
+#### Prerequisites
 
-### v1.3.7.4
+* Chromium / Chrome 58 *(or higher)*.
 
-* Fix rare injection counter issue.
+> **Note:** If you want to contribute to the Firefox Quantum extension, please check out the ```master``` branch. If you are looking for the Firefox legacy extension codebase, please see the ```legacy``` branch.
 
-### v1.3.7.3
+#### Running the Code
 
-* Improve injection state management _(requires a new permission)_.
-* Implement injection overview and icon badge.
+Please read this [developer guide](https://developer.chrome.com/extensions/getstarted) for information on how to run the extension from source.
 
-### v1.3.7.2
+> **Important:** All tagged commits since 26 October 2016 are signed with GPG. It's likely best to ignore unsigned commits, unless you really know what you're doing. Please send an email if you have any questions or security concerns.
 
-* Fix popup icon display issue.
+## Submitting Translations
 
-### v1.3.7.1
+Do you master a non-supported language? Please help out by translating this add-on on [Crowdin](https://crowdin.com/project/decentraleyes).
 
-* Improve compatibility with HTTPS Everywhere.
+## License
 
-### v1.3.7
-
-* Initial release.
+[MPL-2.0](https://www.mozilla.org/MPL/2.0).

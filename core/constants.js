@@ -21,10 +21,14 @@ const Address = {
     'ANY': '*://*/*',
     'ANY_PATH': '/*',
     'ANY_PROTOCOL': '*://',
+    'CHROME': 'chrome:',
     'CHROME_EXTENSION': 'chrome-extension:',
+    'DECENTRALEYES': 'decentraleyes.org',
     'EXAMPLE': 'example.org',
     'HTTP': 'http:',
     'HTTPS': 'https:',
+    'RESOURCE_PATH': '/resources',
+    'ROOT_PATH': '/',
     'WWW_PREFIX': 'www.'
 };
 
@@ -63,6 +67,7 @@ const WebRequest = {
 };
 
 const WebRequestType = {
+    'MAIN_FRAME': 'main_frame',
     'XHR': 'xmlhttprequest'
 };
 

@@ -33,9 +33,14 @@ stateManager.registerInjection = function (tabIdentifier, injection) {
     registeredTab.injections[injectionIdentifier] = injection;
     injectionCount = Object.keys(registeredTab.injections).length || 0;
 
-    if (stateManager.showIconBadge === true) {
+    if (injectionCount > 0) {
 
-        if (injectionCount > 0) {
+        chrome.browserAction.setTitle({
+            'tabId': tabIdentifier,
+            'title': `Decentraleyes (${injectionCount})`
+        });
+
+        if (stateManager.showIconBadge === true) {
 
             wrappers.setBadgeText({
                 'tabId': tabIdentifier,
@@ -100,7 +105,6 @@ stateManager._createTab = function (tab) {
     };
 
     requestFilters = {
-
         'tabId': tabIdentifier,
         'urls': stateManager.validHosts
     };
@@ -119,21 +123,35 @@ stateManager._removeTab = function (tabIdentifier) {
 
 stateManager._updateTab = function (details) {
 
-    let tabIdentifier, frameIdentifier;
+    let tabDomain, domainIsWhitelisted, frameIdentifier, tabIdentifier;
 
-    tabIdentifier = details.tabId;
+    tabDomain = helpers.extractDomainFromUrl(details.url);
+    domainIsWhitelisted = stateManager._domainIsWhitelisted(tabDomain);
+
     frameIdentifier = details.frameId;
+    tabIdentifier = details.tabId;
 
-    if (tabIdentifier === -1 || frameIdentifier !== 0) {
+    if (frameIdentifier !== 0 || tabIdentifier === -1) {
         return;
     }
 
-    if (stateManager.showIconBadge === true) {
+    chrome.browserAction.setTitle({
+        'tabId': tabIdentifier,
+        'title': 'Decentraleyes (0)'
+    });
 
-        wrappers.setBadgeText({
+    if (domainIsWhitelisted) {
+
+        stateManager._setIconDisabled(tabIdentifier);
+
+        chrome.browserAction.setTitle({
             'tabId': tabIdentifier,
-            'text': ''
+            'title': 'Decentraleyes (–)'
         });
+    }
+
+    if (stateManager.showIconBadge === true) {
+        stateManager._clearBadgeText(tabIdentifier);
     }
 
     if (stateManager.tabs[tabIdentifier]) {
@@ -165,11 +183,38 @@ stateManager._handleStorageChanged = function (changes) {
     }
 };
 
-stateManager._removeIconBadgeFromTab = function (tab) {
+stateManager._clearBadgeText = function (tabIdentifier) {
 
     wrappers.setBadgeText({
-        'tabId': tab.id,
+        'tabId': tabIdentifier,
         'text': ''
+    });
+};
+
+stateManager._removeIconBadgeFromTab = function (tab) {
+    stateManager._clearBadgeText(tab.id);
+};
+
+stateManager._domainIsWhitelisted = function (domain) {
+
+    if (domain !== null) {
+
+        let whitelistRecord, isWhitelisted;
+
+        whitelistRecord = requestAnalyzer.whitelistedDomains[domain];
+        isWhitelisted = Boolean(whitelistRecord);
+
+        return isWhitelisted;
+    }
+
+    return false;
+};
+
+stateManager._setIconDisabled = function (tabIdentifier) {
+
+    wrappers.setIcon({
+        'path': stateManager.disabledIconPath,
+        'tabId': tabIdentifier
     });
 };
 
@@ -179,6 +224,17 @@ stateManager._removeIconBadgeFromTab = function (tab) {
 
 stateManager.requests = {};
 stateManager.tabs = {};
+
+stateManager.disabledIconPath = {
+    '16': chrome.runtime.getURL('icons/action/icon16-disabled.png'),
+    '18': chrome.runtime.getURL('icons/action/icon18-disabled.png'),
+    '19': chrome.runtime.getURL('icons/action/icon19-disabled.png'),
+    '32': chrome.runtime.getURL('icons/action/icon32-disabled.png'),
+    '36': chrome.runtime.getURL('icons/action/icon36-disabled.png'),
+    '38': chrome.runtime.getURL('icons/action/icon38-disabled.png'),
+    '64': chrome.runtime.getURL('icons/action/icon64-disabled.png')
+};
+
 stateManager.validHosts = [];
 
 for (let mapping in mappings) {
@@ -216,7 +272,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (requestDetails) {
         };
     }
 
-}, {'types': ['main_frame'], 'urls': [Address.ANY]});
+}, {'types': [WebRequestType.MAIN_FRAME], 'urls': [Address.ANY]});
 
 chrome.webNavigation.onCommitted.addListener(stateManager._updateTab, {
     'url': [{'urlContains': ':'}]

@@ -2,7 +2,7 @@
  * File Guard
  * Belongs to Decentraleyes.
  *
- * @see https://github.com/Synzvato/decentraleyes/pull/258
+ * @see https://git.synz.io/Synzvato/decentraleyes/merge_requests/258
  *
  * @author      Thomas Rientjes
  * @since       2018-05-17
@@ -32,14 +32,14 @@ fileGuard._startListening = function () {
 
     chrome.webRequest.onBeforeRequest.addListener(
         fileGuard._verifyRequest,
-        {'urls': [`${fileGuard.path}/*`]},
+        {'urls': [fileGuard.path + Address.ANY_PATH]},
         [WebRequest.BLOCKING]
     );
 };
 
 fileGuard._verifyRequest = function (requestDetails) {
 
-    let redirectUrl = chrome.runtime.getURL('/');
+    let redirectUrl = chrome.runtime.getURL(Address.ROOT_PATH);
 
     if (!requestDetails.url.endsWith(fileGuard.secret)) {
         return {redirectUrl};
@@ -50,7 +50,7 @@ fileGuard._verifyRequest = function (requestDetails) {
  * Initializations
  */
 
-fileGuard.path = chrome.runtime.getURL('/resources');
+fileGuard.path = chrome.runtime.getURL(Address.RESOURCE_PATH);
 fileGuard.secret = '';
 
 if (fileGuard.path.startsWith(Address.CHROME_EXTENSION)) {
