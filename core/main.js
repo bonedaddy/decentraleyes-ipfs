@@ -41,7 +41,8 @@ main._initializeOptions = function () {
             options = optionDefaults; // Restore option defaults.
         }
 
-        if (options.enforceStaging === true) {
+        if (options.enforceStaging === true ||
+            options.blockMissing === true) {
 
             // Improve coverage at the cost of website stability.
             stateManager.setExtensionEnvironment('staging');

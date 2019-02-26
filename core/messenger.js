@@ -30,6 +30,14 @@ messenger._handleMessageReceived = function (message, sender, sendResponse) {
     topic = message.topic;
     value = message.value;
 
+    if (topic === 'extension:set-environment') {
+
+        stateManager.setExtensionEnvironment(value);
+        sendResponse({value});
+
+        return MessageResponse.SYNCHRONOUS;
+    }
+
     if (topic === 'tab:fetch-injections') {
 
         sendResponse({'value': stateManager.tabs[value].injections});
