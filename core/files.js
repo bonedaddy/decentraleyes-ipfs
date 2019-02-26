@@ -267,10 +267,48 @@ var files = {
     // Files [Staging]
     'staging': {
 
+        // AngularJS
+        'resources/angularjs/1.5.8/angular.min.jsm': true,
+        'resources/angularjs/1.6.1/angular.min.jsm': true,
+        'resources/angularjs/1.6.5/angular.min.jsm': true,
+
+        // Backbone.js
+        'resources/backbone.js/1.3.3/backbone-min.jsm': true,
+
         // jQuery
+        'resources/jquery/2.2.0/jquery.min.jsm': true,
+        'resources/jquery/2.2.1/jquery.min.jsm': true,
+        'resources/jquery/2.2.2/jquery.min.jsm': true,
+        'resources/jquery/2.2.3/jquery.min.jsm': true,
+        'resources/jquery/2.2.4/jquery.min.jsm': true,
+        'resources/jquery/3.0.0/jquery.min.jsm': true,
         'resources/jquery/3.1.0/jquery.min.jsm': true,
         'resources/jquery/3.1.1/jquery.min.jsm': true,
+        'resources/jquery/3.2.0/jquery.min.jsm': true,
         'resources/jquery/3.2.1/jquery.min.jsm': true,
-        'resources/jquery/3.3.1/jquery.min.jsm': true
+        'resources/jquery/3.3.1/jquery.min.jsm': true,
+
+        // Moment.js
+        'resources/moment.js/2.8.3/moment.min.jsm': true,
+        'resources/moment.js/2.8.4/moment.min.jsm': true,
+        'resources/moment.js/2.10.2/moment.min.jsm': true,
+        'resources/moment.js/2.10.3/moment.min.jsm': true,
+        'resources/moment.js/2.10.6/moment.min.jsm': true,
+        'resources/moment.js/2.11.1/moment.min.jsm': true,
+        'resources/moment.js/2.11.2/moment.min.jsm': true,
+        'resources/moment.js/2.17.0/moment.min.jsm': true,
+        'resources/moment.js/2.17.1/moment.min.jsm': true,
+        'resources/moment.js/2.18.1/moment.min.jsm': true,
+        'resources/moment.js/2.19.1/moment.min.jsm': true,
+        'resources/moment.js/2.19.2/moment.min.jsm': true,
+        'resources/moment.js/2.19.3/moment.min.jsm': true,
+        'resources/moment.js/2.20.1/moment.min.jsm': true,
+        'resources/moment.js/2.22.0/moment.min.jsm': true,
+        'resources/moment.js/2.22.1/moment.min.jsm': true,
+        'resources/moment.js/2.22.2/moment.min.jsm': true,
+
+        // Underscore.js
+        'resources/underscore.js/1.9.0/underscore-min.jsm': true,
+        'resources/underscore.js/1.9.1/underscore-min.jsm': true
     }
 };

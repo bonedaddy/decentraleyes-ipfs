@@ -59,6 +59,11 @@ var resources = {
         'path': 'resources/modernizr/{version}/modernizr.min.jsm',
         'type': 'application/javascript'
     },
+    // Moment.js
+    'moment': {
+        'path': 'resources/moment.js/{version}/moment.min.jsm',
+        'type': 'application/javascript'
+    },
     // MooTools
     'mootools': {
         'path': 'resources/mootools/{version}/mootools-yui-compressed.jsm',
