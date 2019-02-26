@@ -134,6 +134,7 @@ interceptor.taintedDomains = {
     '10fastfingers.com': true,
     'blog.datawrapper.de': true,
     'bundleofholding.com': true,
+    'captcha.realtek.com': true,
     'cdnjs.com': true,
     'cellmapper.net': true,
     'code.world': true,
