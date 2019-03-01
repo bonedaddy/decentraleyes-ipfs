@@ -44,11 +44,11 @@
     "description": "Disable prefetch title."
   },
   "disablePrefetchDescription": {
-    "message": "配信ネットワークに許可されていないリクエストの漏れから予防する。",
+    "message": "許可されていないリクエストをネットワークに発行しないようにする",
     "description": "Disable prefetch description."
   },
   "stripMetadataTitle": {
-    "message": "許可されていたるリクエストからメタデータを取り除く",
+    "message": "許可されたリクエストからメタデータを取り除く",
     "description": "Strip metadata title."
   },
   "stripMetadataDescription": {
