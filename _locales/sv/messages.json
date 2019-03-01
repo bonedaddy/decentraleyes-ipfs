@@ -16,11 +16,11 @@
     "description": "Amount injected title."
   },
   "amountInjectedDescription": {
-    "message": "Antalet insatta Content Delivery Network-resurser sedan installationen.",
+    "message": "Antal insatta innehållsleveransnätverksresurser sedan installation.",
     "description": "Amount injected description."
   },
   "optionsTitle": {
-    "message": "Inställningar",
+    "message": "Alternativ",
     "description": "Options title."
   },
   "showIconBadgeTitle": {
@@ -36,7 +36,7 @@
     "description": "Block requests for missing resources title."
   },
   "blockMissingDescription": {
-    "message": "Avbryt avlyssnad begäran om den begärda resursen inte finns lokalt.",
+    "message": "Avbryt avlyssnad begäran om den nödvändiga resursen inte är lokalt tillgänglig.",
     "description": "Block requests for missing resources description."
   },
   "disablePrefetchTitle": {
@@ -64,7 +64,7 @@
     "description": "Whitelisted domains description."
   },
   "advancedLabel": {
-    "message": "Avancerad",
+    "message": "Avancerat",
     "description": "Advanced label."
   }
 }
