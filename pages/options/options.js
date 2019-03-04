@@ -205,23 +205,11 @@ options._onOptionChanged = function ({target}) {
 
     if (optionKey === Setting.BLOCK_MISSING) {
 
-        let preferredEnvironment = 'stable';
-
         if (optionValue === true) {
-
             options._renderBlockMissingNotice();
-            preferredEnvironment = 'staging';
-
         } else {
             options._hideBlockMissingNotice();
         }
-
-        let message = {
-            'topic': 'extension:set-environment',
-            'value': preferredEnvironment
-        };
-
-        chrome.runtime.sendMessage(message);
     }
 
     if (optionKey === Setting.DISABLE_PREFETCH) {

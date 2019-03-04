@@ -70,13 +70,19 @@ stateManager.registerInjection = function (tabIdentifier, injection) {
 
 stateManager.setExtensionEnvironment = function (environment) {
 
-    switch (environment) {
-    case 'staging':
-        files.active = Object.assign({}, files.stable, files.staging);
-        break;
-    default:
-        files.active = files.stable;
-    }
+    return new Promise((resolve) => {
+
+        chrome.storage.local.get(Setting.ENFORCE_STAGING, function (items) {
+
+            if (environment === 'staging' || items.enforceStaging === true) {
+                files.active = Object.assign({}, files.stable, files.staging);
+            } else {
+                files.active = files.stable;
+            }
+
+            resolve();
+        });
+    });
 };
 
 stateManager.addDomainToWhitelist = function (domain) {
@@ -171,6 +177,32 @@ stateManager._updateTab = function (details) {
 };
 
 stateManager._handleStorageChanged = function (changes) {
+
+    if (Setting.BLOCK_MISSING in changes) {
+
+        if (changes.blockMissing.newValue === true) {
+            stateManager.setExtensionEnvironment('staging');
+        } else {
+            stateManager.setExtensionEnvironment('stable');
+        }
+    }
+
+    if (Setting.ENFORCE_STAGING in changes) {
+
+        chrome.storage.local.get(Setting.BLOCK_MISSING, function (items) {
+
+            if (changes.enforceStaging.newValue === true) {
+                stateManager.setExtensionEnvironment('staging');
+            } else {
+
+                if (items.blockMissing === true) {
+                    stateManager.setExtensionEnvironment('staging');
+                } else {
+                    stateManager.setExtensionEnvironment('stable');
+                }
+            }
+        });
+    }
 
     if (Setting.SHOW_ICON_BADGE in changes) {
 
