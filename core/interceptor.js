@@ -207,7 +207,8 @@ interceptor.taintedDomains = {
     'yelp.com': true,
     'yourvotematters.co.uk': true,
     'zabrze.com.pl': true,
-    'zh-hant.sharkoon.com': true
+    'zh-hant.sharkoon.com': true,
+    'zory.com.pl': true
 };
 
 interceptor.amountInjected = 0;
