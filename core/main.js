@@ -42,9 +42,9 @@ main._initializeOptions = function () {
         }
 
         if (options.blockMissing === true) {
-
-            // Improve coverage at the cost of website stability.
             stateManager.setExtensionEnvironment('staging');
+        } else {
+            stateManager.setExtensionEnvironment('stable');
         }
 
         if (options.disablePrefetch !== false) {
@@ -96,8 +96,6 @@ main._showReleaseNotes = function (details) {
  */
 
 chrome.runtime.onInstalled.addListener(main._showReleaseNotes);
-stateManager.setExtensionEnvironment('stable');
-
 main._initializeOptions();
 
 wrappers.setBadgeBackgroundColor({

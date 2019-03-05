@@ -75,8 +75,13 @@ stateManager.setExtensionEnvironment = function (environment) {
         chrome.storage.local.get(Setting.ENFORCE_STAGING, function (items) {
 
             if (environment === 'staging' || items.enforceStaging === true) {
+
+                // Improve coverage at the expense of website stability.
                 files.active = Object.assign({}, files.stable, files.staging);
+
             } else {
+
+                // Find a balance between coverage and website stability.
                 files.active = files.stable;
             }
 
