@@ -70,12 +70,12 @@ stateManager.registerInjection = function (tabIdentifier, injection) {
 
 stateManager.setEnvironment = function (environment) {
 
-    if (environment === 'stable') {
+    if (environment === Environment.STABLE) {
 
         // Strike a balance between coverage and website stability.
         files.active = files.stable;
 
-    } else if (environment === 'staging') {
+    } else if (environment === Environment.STAGING) {
 
         // Improve coverage at the expense of website stability.
         files.active = Object.assign({}, files.stable, files.staging);
@@ -86,24 +86,24 @@ stateManager.updateEnvironment = function (preferredEnvironment) {
 
     return new Promise((resolve) => {
 
-        if (preferredEnvironment === 'stable') {
+        if (preferredEnvironment === Environment.STABLE) {
 
             let requiredItems = [Setting.BLOCK_MISSING, Setting.ENFORCE_STAGING];
 
             chrome.storage.local.get(requiredItems, function (items) {
 
                 if (items.blockMissing === true || items.enforceStaging === true) {
-                    stateManager.setEnvironment('staging');
+                    stateManager.setEnvironment(Environment.STAGING);
                 } else {
-                    stateManager.setEnvironment('stable');
+                    stateManager.setEnvironment(Environment.STABLE);
                 }
 
                 resolve();
             });
 
-        } else if (preferredEnvironment === 'staging') {
+        } else if (preferredEnvironment === Environment.STAGING) {
 
-            stateManager.setEnvironment('staging');
+            stateManager.setEnvironment(Environment.STAGING);
             resolve();
         }
     });
@@ -205,18 +205,18 @@ stateManager._handleStorageChanged = function (changes) {
     if (Setting.BLOCK_MISSING in changes) {
 
         if (changes.blockMissing.newValue === true) {
-            stateManager.updateEnvironment('staging');
+            stateManager.updateEnvironment(Environment.STAGING);
         } else {
-            stateManager.updateEnvironment('stable');
+            stateManager.updateEnvironment(Environment.STABLE);
         }
     }
 
     if (Setting.ENFORCE_STAGING in changes) {
 
         if (changes.enforceStaging.newValue === true) {
-            stateManager.updateEnvironment('staging');
+            stateManager.updateEnvironment(Environment.STAGING);
         } else {
-            stateManager.updateEnvironment('stable');
+            stateManager.updateEnvironment(Environment.STABLE);
         }
     }
 

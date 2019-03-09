@@ -20,7 +20,7 @@
 var files = {
 
     // Files [Stable]
-    'stable': {
+    [Environment.STABLE]: {
 
         // AngularJS
         'resources/angularjs/1.0.1/angular.min.jsm': true,
@@ -265,7 +265,7 @@ var files = {
     },
 
     // Files [Staging]
-    'staging': {
+    [Environment.STAGING]: {
 
         // AngularJS
         'resources/angularjs/1.5.8/angular.min.jsm': true,

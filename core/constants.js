@@ -32,6 +32,11 @@ const Address = {
     'WWW_PREFIX': 'www.'
 };
 
+const Environment = {
+    'STABLE': 'stable',
+    'STAGING': 'staging'
+};
+
 const Header = {
     'COOKIE': 'Cookie',
     'ORIGIN': 'Origin',

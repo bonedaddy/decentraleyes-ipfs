@@ -42,9 +42,9 @@ main._initializeSettings = function () {
         }
 
         if (items.blockMissing === true || items.enforceStaging === true) {
-            stateManager.updateEnvironment('staging');
+            stateManager.updateEnvironment(Environment.STAGING);
         } else {
-            stateManager.updateEnvironment('stable');
+            stateManager.updateEnvironment(Environment.STABLE);
         }
 
         if (items.disablePrefetch !== false) {

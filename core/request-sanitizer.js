@@ -65,9 +65,9 @@ requestSanitizer._stripMetadata = function (requestDetails) {
  * Initializations
  */
 
-chrome.storage.local.get({[Setting.STRIP_METADATA]: true}, function (options) {
+chrome.storage.local.get({[Setting.STRIP_METADATA]: true}, function (items) {
 
-    if (options === null || options.stripMetadata !== false) {
+    if (items === null || items.stripMetadata !== false) {
         requestSanitizer.enable();
     }
 });
