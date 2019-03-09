@@ -68,25 +68,44 @@ stateManager.registerInjection = function (tabIdentifier, injection) {
     }
 };
 
-stateManager.setExtensionEnvironment = function (environment) {
+stateManager.setEnvironment = function (environment) {
+
+    if (environment === 'stable') {
+
+        // Strike a balance between coverage and website stability.
+        files.active = files.stable;
+
+    } else if (environment === 'staging') {
+
+        // Improve coverage at the expense of website stability.
+        files.active = Object.assign({}, files.stable, files.staging);
+    }
+};
+
+stateManager.updateEnvironment = function (preferredEnvironment) {
 
     return new Promise((resolve) => {
 
-        chrome.storage.local.get(Setting.ENFORCE_STAGING, function (items) {
+        if (preferredEnvironment === 'stable') {
 
-            if (environment === 'staging' || items.enforceStaging === true) {
+            let requiredItems = [Setting.BLOCK_MISSING, Setting.ENFORCE_STAGING];
 
-                // Improve coverage at the expense of website stability.
-                files.active = Object.assign({}, files.stable, files.staging);
+            chrome.storage.local.get(requiredItems, function (items) {
 
-            } else {
+                if (items.blockMissing === true || items.enforceStaging === true) {
+                    stateManager.setEnvironment('staging');
+                } else {
+                    stateManager.setEnvironment('stable');
+                }
 
-                // Find a balance between coverage and website stability.
-                files.active = files.stable;
-            }
+                resolve();
+            });
 
+        } else if (preferredEnvironment === 'staging') {
+
+            stateManager.setEnvironment('staging');
             resolve();
-        });
+        }
     });
 };
 
@@ -186,27 +205,19 @@ stateManager._handleStorageChanged = function (changes) {
     if (Setting.BLOCK_MISSING in changes) {
 
         if (changes.blockMissing.newValue === true) {
-            stateManager.setExtensionEnvironment('staging');
+            stateManager.updateEnvironment('staging');
         } else {
-            stateManager.setExtensionEnvironment('stable');
+            stateManager.updateEnvironment('stable');
         }
     }
 
     if (Setting.ENFORCE_STAGING in changes) {
 
-        chrome.storage.local.get(Setting.BLOCK_MISSING, function (items) {
-
-            if (changes.enforceStaging.newValue === true) {
-                stateManager.setExtensionEnvironment('staging');
-            } else {
-
-                if (items.blockMissing === true) {
-                    stateManager.setExtensionEnvironment('staging');
-                } else {
-                    stateManager.setExtensionEnvironment('stable');
-                }
-            }
-        });
+        if (changes.enforceStaging.newValue === true) {
+            stateManager.updateEnvironment('staging');
+        } else {
+            stateManager.updateEnvironment('stable');
+        }
     }
 
     if (Setting.SHOW_ICON_BADGE in changes) {

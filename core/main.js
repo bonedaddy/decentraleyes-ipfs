@@ -41,10 +41,10 @@ main._initializeSettings = function () {
             items = settingDefaults; // Restore setting defaults.
         }
 
-        if (items.blockMissing === true) {
-            stateManager.setExtensionEnvironment('staging');
+        if (items.blockMissing === true || items.enforceStaging === true) {
+            stateManager.updateEnvironment('staging');
         } else {
-            stateManager.setExtensionEnvironment('stable');
+            stateManager.updateEnvironment('stable');
         }
 
         if (items.disablePrefetch !== false) {
