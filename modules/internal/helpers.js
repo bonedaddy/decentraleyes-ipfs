@@ -88,7 +88,7 @@ helpers.normalizeDomain = function (domain) {
     return domain;
 };
 
-helpers.extractDomainFromUrl = function (url, normalize) {
+helpers.extractDomainFromUrl = function (url = '', normalize) {
 
     let extractedDomain;
 

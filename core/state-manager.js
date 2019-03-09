@@ -324,7 +324,7 @@ chrome.tabs.onRemoved.addListener(stateManager._removeTab);
 
 chrome.webRequest.onBeforeRequest.addListener(function (requestDetails) {
 
-    if (requestDetails.tabId !== -1) {
+    if (requestDetails.tabId !== -1 && stateManager.tabs[requestDetails.tabId]) {
 
         stateManager.tabs[requestDetails.tabId].details = {
             'url': requestDetails.url
