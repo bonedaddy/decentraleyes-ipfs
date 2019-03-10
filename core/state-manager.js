@@ -68,6 +68,47 @@ stateManager.registerInjection = function (tabIdentifier, injection) {
     }
 };
 
+stateManager.setEnvironment = function (environment) {
+
+    if (environment === Environment.STABLE) {
+
+        // Strike a balance between coverage and website stability.
+        files.active = files.stable;
+
+    } else if (environment === Environment.STAGING) {
+
+        // Improve coverage at the expense of website stability.
+        files.active = Object.assign({}, files.stable, files.staging);
+    }
+};
+
+stateManager.updateEnvironment = function (preferredEnvironment) {
+
+    return new Promise((resolve) => {
+
+        if (preferredEnvironment === Environment.STABLE) {
+
+            let requiredItems = [Setting.BLOCK_MISSING, Setting.ENFORCE_STAGING];
+
+            chrome.storage.local.get(requiredItems, function (items) {
+
+                if (items.blockMissing === true || items.enforceStaging === true) {
+                    stateManager.setEnvironment(Environment.STAGING);
+                } else {
+                    stateManager.setEnvironment(Environment.STABLE);
+                }
+
+                resolve();
+            });
+
+        } else if (preferredEnvironment === Environment.STAGING) {
+
+            stateManager.setEnvironment(Environment.STAGING);
+            resolve();
+        }
+    });
+};
+
 stateManager.addDomainToWhitelist = function (domain) {
 
     return new Promise((resolve) => {
@@ -160,6 +201,24 @@ stateManager._updateTab = function (details) {
 };
 
 stateManager._handleStorageChanged = function (changes) {
+
+    if (Setting.BLOCK_MISSING in changes) {
+
+        if (changes.blockMissing.newValue === true) {
+            stateManager.updateEnvironment(Environment.STAGING);
+        } else {
+            stateManager.updateEnvironment(Environment.STABLE);
+        }
+    }
+
+    if (Setting.ENFORCE_STAGING in changes) {
+
+        if (changes.enforceStaging.newValue === true) {
+            stateManager.updateEnvironment(Environment.STAGING);
+        } else {
+            stateManager.updateEnvironment(Environment.STABLE);
+        }
+    }
 
     if (Setting.SHOW_ICON_BADGE in changes) {
 
@@ -265,7 +324,7 @@ chrome.tabs.onRemoved.addListener(stateManager._removeTab);
 
 chrome.webRequest.onBeforeRequest.addListener(function (requestDetails) {
 
-    if (requestDetails.tabId !== -1) {
+    if (requestDetails.tabId !== -1 && stateManager.tabs[requestDetails.tabId]) {
 
         stateManager.tabs[requestDetails.tabId].details = {
             'url': requestDetails.url

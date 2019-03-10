@@ -32,6 +32,11 @@ const Address = {
     'WWW_PREFIX': 'www.'
 };
 
+const Environment = {
+    'STABLE': 'stable',
+    'STAGING': 'staging'
+};
+
 const Header = {
     'COOKIE': 'Cookie',
     'ORIGIN': 'Origin',
@@ -53,6 +58,7 @@ const Setting = {
     'AMOUNT_INJECTED': 'amountInjected',
     'BLOCK_MISSING': 'blockMissing',
     'DISABLE_PREFETCH': 'disablePrefetch',
+    'ENFORCE_STAGING': 'enforceStaging',
     'SHOW_ICON_BADGE': 'showIconBadge',
     'SHOW_RELEASE_NOTES': 'showReleaseNotes',
     'STRIP_METADATA': 'stripMetadata',

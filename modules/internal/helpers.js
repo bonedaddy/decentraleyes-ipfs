@@ -62,9 +62,9 @@ helpers.languageIsFullySupported = function (language) {
     languageSupported = false;
 
     supportedLanguages = [
-        'ar', 'bg', 'zh', 'cs', 'da', 'nl', 'en', 'et', 'fi',
-        'fr', 'de', 'el', 'is', 'id', 'it', 'ja', 'ko', 'lb',
-        'pl', 'pt', 'ro', 'ru', 'es', 'sv', 'tr'
+        'ar', 'bg', 'zh', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'fi',
+        'fr', 'de', 'el', 'he', 'hu', 'is', 'id', 'it', 'ja', 'ko',
+        'nb', 'pl', 'pt', 'ro', 'ru', 'es', 'sv', 'tr'
     ];
 
     for (let supportedLanguage of supportedLanguages) {
@@ -88,7 +88,7 @@ helpers.normalizeDomain = function (domain) {
     return domain;
 };
 
-helpers.extractDomainFromUrl = function (url, normalize) {
+helpers.extractDomainFromUrl = function (url = '', normalize) {
 
     let extractedDomain;
 

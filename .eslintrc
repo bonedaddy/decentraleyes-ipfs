@@ -10,6 +10,7 @@
   ],
   "globals": {
     "Address": true,
+    "Environment": true,
     "fileGuard": true,
     "files": true,
     "Header": true,

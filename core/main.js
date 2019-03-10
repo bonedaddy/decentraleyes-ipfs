@@ -23,31 +23,38 @@ var main = {};
  * Private Methods
  */
 
-main._initializeOptions = function () {
+main._initializeSettings = function () {
 
-    let optionDefaults = {
+    let settingDefaults = {
         [Setting.XHR_TEST_DOMAIN]: Address.DECENTRALEYES,
         [Setting.SHOW_ICON_BADGE]: true,
         [Setting.BLOCK_MISSING]: false,
         [Setting.DISABLE_PREFETCH]: true,
+        [Setting.ENFORCE_STAGING]: false,
         [Setting.STRIP_METADATA]: true,
         [Setting.WHITELISTED_DOMAINS]: {}
     };
 
-    chrome.storage.local.get(optionDefaults, function (options) {
+    chrome.storage.local.get(settingDefaults, function (items) {
 
-        if (options === null) {
-            options = optionDefaults;
+        if (items === null) {
+            items = settingDefaults; // Restore setting defaults.
         }
 
-        if (options.disablePrefetch !== false) {
+        if (items.blockMissing === true || items.enforceStaging === true) {
+            stateManager.updateEnvironment(Environment.STAGING);
+        } else {
+            stateManager.updateEnvironment(Environment.STABLE);
+        }
+
+        if (items.disablePrefetch !== false) {
 
             chrome.privacy.network.networkPredictionEnabled.set({
                 'value': false
             });
         }
 
-        chrome.storage.local.set(options);
+        chrome.storage.local.set(items);
     });
 };
 
@@ -70,9 +77,9 @@ main._showReleaseNotes = function (details) {
 
             chrome.storage.local.get({
                 [Setting.SHOW_RELEASE_NOTES]: true
-            }, function (options) {
+            }, function (items) {
 
-                if (options.showReleaseNotes === true) {
+                if (items.showReleaseNotes === true) {
 
                     chrome.tabs.create({
                         'url': location,
@@ -89,7 +96,7 @@ main._showReleaseNotes = function (details) {
  */
 
 chrome.runtime.onInstalled.addListener(main._showReleaseNotes);
-main._initializeOptions();
+main._initializeSettings();
 
 wrappers.setBadgeBackgroundColor({
     'color': [74, 130, 108, 255]
