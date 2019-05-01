@@ -176,6 +176,7 @@ interceptor.taintedDomains = {
     'nhm.ac.uk': true,
     'nl.sharkoon.com': true,
     'opavote.com': true,
+    'opendata.cbs.nl': true,
     'openweathermap.org': true,
     'orzesze.com.pl': true,
     'piekaryslaskie.com.pl': true,
