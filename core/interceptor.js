@@ -197,6 +197,7 @@ interceptor.taintedDomains = {
     'siemianowice.net.pl': true,
     'somiibo.com': true,
     'sosnowiecki.pl': true,
+    'stadium.se': true,
     'stefansundin.github.io': true,
     'swiony.pl': true,
     'timescale.com': true,
