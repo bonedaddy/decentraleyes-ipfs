@@ -49,7 +49,9 @@ interceptor.handleRequest = function (requestDetails, tabIdentifier, tab) {
         }
     }
 
-    if (interceptor.taintedDomains[tabDomain] || (/yandex\./).test(tabDomain)) {
+    if (interceptor.taintedDomains[tabDomain] || (/yandex\./).test(tabDomain) ||
+        (/wickedlocal\.com/).test(tabDomain)) {
+
         return interceptor._handleMissingCandidate(requestDetails.url, true);
     }
 
