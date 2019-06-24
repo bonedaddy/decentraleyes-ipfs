@@ -12,7 +12,7 @@
     "description": "Enable protection title."
   },
   "amountInjectedTitle": {
-    "message": "Contador para fuentes inyectadas localmente",
+    "message": "Contador de recursos inyectados localmente",
     "description": "Amount injected title."
   },
   "amountInjectedDescription": {
@@ -36,7 +36,7 @@
     "description": "Block requests for missing resources title."
   },
   "blockMissingDescription": {
-    "message": "Cancelar peticiones detenidas si la fuente requerida no se encuentra localmente.",
+    "message": "Cancelar las peticiones interceptadas cuando el recurso requerido no se encuentra localmente.",
     "description": "Block requests for missing resources description."
   },
   "disablePrefetchTitle": {
@@ -44,7 +44,7 @@
     "description": "Disable prefetch title."
   },
   "disablePrefetchDescription": {
-    "message": "Prevenir que las solicitudes no permitidas se escapen hacia redes de distribución.",
+    "message": "Impedir que las peticiones no permitidas se escapen hacia redes de distribución.",
     "description": "Disable prefetch description."
   },
   "stripMetadataTitle": {
@@ -60,7 +60,7 @@
     "description": "Whitelisted domains title."
   },
   "whitelistedDomainsDescription": {
-    "message": "Ingresar dominios a ser ignorados. Separar múltiples entradas con punto y coma (;).",
+    "message": "Ingresa los dominios que serán ignorados. Separa múltiples entradas con punto y coma (;).",
     "description": "Whitelisted domains description."
   },
   "advancedLabel": {

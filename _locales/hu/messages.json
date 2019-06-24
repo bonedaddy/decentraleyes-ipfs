@@ -60,11 +60,11 @@
     "description": "Whitelisted domains title."
   },
   "whitelistedDomainsDescription": {
-    "message": "Írj be domaineket, amik ne legyenek megvizsgálva. Az egyes elemeket pontosvesszővel (;) kell elválasztani.",
+    "message": "Írj be domaineket, amik ne legyenek megvizsgálva. Az elemeket pontosvesszővel (;) kell elválasztani.",
     "description": "Whitelisted domains description."
   },
   "advancedLabel": {
-    "message": "Speciális",
+    "message": "Haladó",
     "description": "Advanced label."
   }
 }
