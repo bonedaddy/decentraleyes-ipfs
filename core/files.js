@@ -287,6 +287,8 @@ var files = {
         'resources/jquery/3.2.0/jquery.min.jsm': true,
         'resources/jquery/3.2.1/jquery.min.jsm': true,
         'resources/jquery/3.3.1/jquery.min.jsm': true,
+        'resources/jquery/3.4.0/jquery.min.jsm': true,
+        'resources/jquery/3.4.1/jquery.min.jsm': true,
 
         // Moment.js
         'resources/moment.js/2.8.3/moment.min.jsm': true,
