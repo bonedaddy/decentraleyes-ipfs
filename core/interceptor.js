@@ -394,6 +394,7 @@ interceptor.taintedDomains = {
     'sentinel-standard.com': true,
     'shelbystar.com': true,
     'siemianowice.net.pl': true,
+    'signal.org': true,
     'siskiyoudaily.com': true,
     'sj-r.com': true,
     'sjnewsonline.com': true,
