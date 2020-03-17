@@ -335,6 +335,7 @@ interceptor.taintedDomains = {
     'ohio.com': true,
     'olneydailymail.com': true,
     'onlineathens.com': true,
+    'onwelo.com': true,
     'opavote.com': true,
     'opendata.cbs.nl': true,
     'openweathermap.org': true,
