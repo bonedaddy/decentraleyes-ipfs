@@ -459,6 +459,7 @@ interceptor.taintedDomains = {
     'udacity.com': true,
     'uticaod.com': true,
     'vanalstyneleader.com': true,
+    'viaplay.se': true,
     'vvdailypress.com': true,
     'waltonsun.com': true,
     'washingtontimesreporter.com': true,
