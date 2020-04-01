@@ -50,6 +50,31 @@ popup._renderNonContextualContents = function () {
 
     testingUtilityLinkElement.addEventListener('mouseup', popup._onTestingUtilityLinkClicked);
     optionsButtonElement.addEventListener('mouseup', popup._onOptionsButtonClicked);
+
+    testingUtilityLinkElement.addEventListener('keydown', function (event) {
+
+        let enterOrSpaceKeyPressed = helpers.enterOrSpaceKeyPressed(event);
+
+        if (enterOrSpaceKeyPressed) {
+
+            chrome.tabs.create({
+                'url': 'https://decentraleyes.org/test'
+            });
+
+            window.close();
+        }
+    });
+
+    optionsButtonElement.addEventListener('keydown', function (event) {
+
+        let enterOrSpaceKeyPressed = helpers.enterOrSpaceKeyPressed(event);
+
+        if (enterOrSpaceKeyPressed) {
+
+            chrome.runtime.openOptionsPage();
+            return window.close();
+        }
+    });
 };
 
 popup._renderContextualContents = function () {
@@ -82,6 +107,15 @@ popup._renderDomainWhitelistPanel = function () {
         protectionToggleElement.addEventListener('click', popup._enableProtection);
         protectionToggleElement.setAttribute('title', enableProtectionTitle);
 
+        protectionToggleElement.addEventListener('keydown', function (event) {
+
+            let enterOrSpaceKeyPressed = helpers.enterOrSpaceKeyPressed(event);
+
+            if (enterOrSpaceKeyPressed) {
+                popup._enableProtection();
+            }
+        });
+
     } else {
 
         let disableProtectionTitle = chrome.i18n.getMessage('disableProtectionTitle');
@@ -89,6 +123,15 @@ popup._renderDomainWhitelistPanel = function () {
         protectionToggleElement.setAttribute('class', 'button button-toggle active');
         protectionToggleElement.addEventListener('click', popup._disableProtection);
         protectionToggleElement.setAttribute('title', disableProtectionTitle);
+
+        protectionToggleElement.addEventListener('keydown', function (event) {
+
+            let enterOrSpaceKeyPressed = helpers.enterOrSpaceKeyPressed(event);
+
+            if (enterOrSpaceKeyPressed) {
+                popup._disableProtection();
+            }
+        });
     }
 
     websiteContextElement.setAttribute('class', 'panel');
@@ -156,9 +199,7 @@ popup._determineResourceInjections = function () {
 
         chrome.runtime.sendMessage(message, function (response) {
 
-            let groupedInjections = popup._groupResourceInjections(response.value);
-            popup._resourceInjections = groupedInjections;
-
+            popup._resourceInjections = popup._groupResourceInjections(response.value);
             resolve();
         });
     });
@@ -196,10 +237,13 @@ popup._groupResourceInjections = function (injections) {
 
     for (let index in injections) {
 
-        let {source} = injections[index];
+        if (injections.hasOwnProperty(index)) {
 
-        groupedInjections[source] = groupedInjections[source] || [];
-        groupedInjections[source].push(injections[index]);
+            let {source} = injections[index];
+
+            groupedInjections[source] = groupedInjections[source] || [];
+            groupedInjections[source].push(injections[index]);
+        }
     }
 
     return groupedInjections;
@@ -212,15 +256,18 @@ popup._createInjectionOverviewElement = function (groupedInjections) {
 
     for (let source in groupedInjections) {
 
-        let injectionGroupHeaderElement, injectionGroupElement, cdn;
+        if (groupedInjections.hasOwnProperty(source)) {
 
-        cdn = groupedInjections[source];
+            let injectionGroupHeaderElement, injectionGroupElement, cdn;
 
-        injectionGroupHeaderElement = popup._createInjectionGroupHeaderElement(source, cdn);
-        injectionGroupElement = popup._createInjectionGroupElement(source, cdn);
+            cdn = groupedInjections[source];
 
-        injectionOverviewElement.appendChild(injectionGroupHeaderElement);
-        injectionOverviewElement.appendChild(injectionGroupElement);
+            injectionGroupHeaderElement = popup._createInjectionGroupHeaderElement(source, cdn);
+            injectionGroupElement = popup._createInjectionGroupElement(source, cdn);
+
+            injectionOverviewElement.appendChild(injectionGroupHeaderElement);
+            injectionOverviewElement.appendChild(injectionGroupElement);
+        }
     }
 
     return injectionOverviewElement;
