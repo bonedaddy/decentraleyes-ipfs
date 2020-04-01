@@ -458,6 +458,7 @@ interceptor.taintedDomains = {
     'tuscaloosanews.com': true,
     'udacity.com': true,
     'uticaod.com': true,
+    'uworld.com': true,
     'vanalstyneleader.com': true,
     'viaplay.se': true,
     'vvdailypress.com': true,
