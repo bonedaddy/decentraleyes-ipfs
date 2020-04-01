@@ -7,6 +7,7 @@ body {
     cursor: default;
     font-family: 'Noto Sans', Arial, sans-serif !important;
     font-size: 12px;
+    margin-bottom: 5px;
     margin-top: -15px;
     padding: 10px !important;
 }
@@ -27,11 +28,18 @@ body {
 
 .notice-default {
     background-color: #f1f1f1;
+    border: 1px solid #d2d2d2;
+    color: #282828;
 }
 
 .notice-warning {
-    background-color: #ffa500;
-    color: #fff;
+    background-color: #ffd90f;
+    border: 1px solid #d2b115;
+    color: #463a02;
+}
+
+.notice-secondary {
+    margin-top: 50px;
 }
 
 /**
@@ -77,13 +85,21 @@ body {
  */
 
 .input-checkbox {
-    margin: 0 4px 0 0;
+    margin: 0 5px 0 0;
     outline: 0;
 }
 
 .input-text {
     margin-left: 29px;
     max-width: 320px;
+}
+
+.text-label {
+    padding: 0 2px;
+}
+
+.input-checkbox:focus + .text-label {
+    outline: 1px dotted #000;
 }
 
 /**
@@ -101,9 +117,11 @@ body {
 .button {
     -moz-user-select: none;
     background-color: #f5f5f5;
+    border-color: #cfcfcf;
     border-radius: 2px;
-    border: 1px solid #cfcfcf;
-    color: #5f5f5f;
+    border-style: solid;
+    border-width: 1px 1px 2px 1px;
+    color: #282828;
     cursor: pointer;
     float: right;
     font-size: 12px;
@@ -118,24 +136,40 @@ body {
     background-color: #fff;
 }
 
+.button:focus {
+    background-color: #fff;
+    border-color: #9a9a9a;
+    color: #000;
+}
+
 .button:active {
     background-color: #dedede;
+    margin-top: 1px;
+    border-bottom-width: 1px;
 }
 
 .button-warning {
-    background-color: #ea9700;
-    border: 1px solid #d88c00;
-    color: #fff;
+    background-color: #ffef95;
+    border-color: #ae920d;
+    color: #1a1500;
 }
 
 .button-warning:hover {
-    background-color: #d88c00;
-    border-color: #c98200;
+    background-color: #fffbde;
+    border-color: #a48b14;
+    color: #000;
+}
+
+.button-warning:focus {
+    background-color: #fff9d8;
+    border-color: #91790a;
+    color: #000;
 }
 
 .button-warning:active {
-    background-color: #c07c00;
-    border-color: #b47400;
+    background-color: #d7b002;
+    border-color: #a48900;
+    color: #292100;
 }
 
 .button-notice {
@@ -156,7 +190,7 @@ body {
  */
 
 .description-option {
-    color: #777;
+    color: #757575;
     font-style: italic;
     padding-left: 29px;
 }
@@ -171,7 +205,9 @@ body {
 }
 
 .badge-warning {
-    background-color: #ffa500;
+    background-color: #ffd90f;
+    border: 1px solid #f0c600;
+    color: #463a02;
 }
 
 .hidden {
@@ -232,15 +268,11 @@ body[dir="rtl"] .input-text {
         color: #f9f9fa;
     }
 
-    .title-option {
-        color: #f9f9fa;
-    }
-
     .description-option {
         color: #b1b1b3;
     }
 
-    .badge-warning {
-        color: #4b3000;
+    .input-checkbox:focus + .text-label {
+        outline: 1px dotted #f9f9fa;
     }
 }

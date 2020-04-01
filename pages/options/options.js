@@ -74,7 +74,7 @@ options._hideBlockMissingNotice = function () {
 options._renderLocaleNotice = function () {
 
     let localeNoticeElement = document.getElementById('notice-locale');
-    localeNoticeElement.setAttribute('class', 'notice notice-default');
+    localeNoticeElement.setAttribute('class', 'notice notice-default notice-secondary');
 };
 
 options._registerOptionChangedEventListeners = function (elements) {
@@ -88,14 +88,30 @@ options._registerOptionChangedEventListeners = function (elements) {
 
 options._registerMiscellaneousEventListeners = function () {
 
-    let blockMissingButtonElement = document.getElementById('button-block-missing');
+    let blockMissingButtonElement, helpTranslateButtonElement;
 
-    blockMissingButtonElement.addEventListener('click', function () {
+    blockMissingButtonElement = document.getElementById('button-block-missing');
+    helpTranslateButtonElement = document.getElementById('button-help-translate');
 
-        let changeEvent = new Event('change');
+    blockMissingButtonElement.addEventListener('click', options._onDisableBlockMissing);
+    helpTranslateButtonElement.addEventListener('click', options._onHelpTranslate);
 
-        options._optionElements.blockMissing.checked = false;
-        options._optionElements.blockMissing.dispatchEvent(changeEvent);
+    blockMissingButtonElement.addEventListener('keydown', function (event) {
+
+        let enterOrSpaceKeyPressed = helpers.enterOrSpaceKeyPressed(event);
+
+        if (enterOrSpaceKeyPressed) {
+            options._onDisableBlockMissing();
+        }
+    });
+
+    helpTranslateButtonElement.addEventListener('keydown', function (event) {
+
+        let enterOrSpaceKeyPressed = helpers.enterOrSpaceKeyPressed(event);
+
+        if (enterOrSpaceKeyPressed) {
+            options._onHelpTranslate();
+        }
     });
 };
 
@@ -119,15 +135,13 @@ options._getOptionElement = function (optionKey) {
 
 options._getOptionElements = function () {
 
-    let optionElements = {
+    return {
         [Setting.SHOW_ICON_BADGE]: options._getOptionElement(Setting.SHOW_ICON_BADGE),
         [Setting.BLOCK_MISSING]: options._getOptionElement(Setting.BLOCK_MISSING),
         [Setting.DISABLE_PREFETCH]: options._getOptionElement(Setting.DISABLE_PREFETCH),
         [Setting.STRIP_METADATA]: options._getOptionElement(Setting.STRIP_METADATA),
         [Setting.WHITELISTED_DOMAINS]: options._getOptionElement(Setting.WHITELISTED_DOMAINS)
     };
-
-    return optionElements;
 };
 
 options._configureLinkPrefetching = function (value) {
@@ -222,6 +236,21 @@ options._onOptionChanged = function ({target}) {
 
     chrome.storage.local.set({
         [optionKey]: optionValue
+    });
+};
+
+options._onDisableBlockMissing = function () {
+
+    let changeEvent = new Event('change');
+
+    options._optionElements.blockMissing.checked = false;
+    options._optionElements.blockMissing.dispatchEvent(changeEvent);
+};
+
+options._onHelpTranslate = function () {
+
+    chrome.tabs.create({
+        'url': 'https://crowdin.com/project/decentraleyes'
     });
 };
 

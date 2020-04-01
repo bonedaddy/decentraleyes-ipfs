@@ -77,6 +77,15 @@ helpers.languageIsFullySupported = function (language) {
     return languageSupported;
 };
 
+helpers.enterOrSpaceKeyPressed = function (event) {
+
+    if (!event.isComposing && event.keyCode !== 229) {
+        return event.keyCode === 13 || event.keyCode === 32;
+    }
+
+    return false;
+};
+
 helpers.normalizeDomain = function (domain) {
 
     domain = domain.toLowerCase().trim();

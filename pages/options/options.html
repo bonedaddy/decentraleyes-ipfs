@@ -37,8 +37,8 @@
                 <div class="notice-message">
                     This feature breaks websites. Do not leave it enabled, unless you are prepared to manually whitelist any affected domains.
                 </div>
-                
-                <div class="button button-notice button-warning" id="button-block-missing">
+
+                <div class="button button-notice button-warning" id="button-block-missing" tabindex="0">
                     Disable
                 </div>
 
@@ -53,7 +53,7 @@
                 <label class="label-checkbox">
 
                     <input class="input-checkbox" data-option="showIconBadge" type="checkbox">
-                    <span data-i18n-content="showIconBadgeTitle"></span>
+                    <span class="text-label" data-i18n-content="showIconBadgeTitle"></span>
 
                 </label>
 
@@ -70,7 +70,7 @@
                 <label class="label-checkbox">
 
                     <input class="input-checkbox" data-option="blockMissing" type="checkbox">
-                    <span data-i18n-content="blockMissingTitle"></span>
+                    <span class="text-label" data-i18n-content="blockMissingTitle"></span>
 
                 </label>
 
@@ -89,7 +89,7 @@
                 <label class="label-checkbox">
 
                     <input class="input-checkbox" data-option="disablePrefetch" type="checkbox">
-                    <span data-i18n-content="disablePrefetchTitle"></span>
+                    <span class="text-label" data-i18n-content="disablePrefetchTitle"></span>
 
                 </label>
 
@@ -108,7 +108,7 @@
                 <label class="label-checkbox">
 
                     <input class="input-checkbox" data-option="stripMetadata" type="checkbox">
-                    <span data-i18n-content="stripMetadataTitle"></span>
+                    <span class="text-label" data-i18n-content="stripMetadataTitle"></span>
 
                 </label>
 
@@ -122,13 +122,13 @@
 
         <section class="option">
 
-            <div class="title-option" data-i18n-content="whitelistedDomainsTitle"></div>
-            <input class="input-text" data-option="whitelistedDomains" type="text">
+            <label for="input-domains" class="title-option" data-i18n-content="whitelistedDomainsTitle"></label>
+            <input id="input-domains" class="input-text" data-option="whitelistedDomains" type="text">
             <div class="description-option" data-i18n-content="whitelistedDomainsDescription"></div>
 
         </section>
 
-        <section class="notice notice-default hidden" id="notice-locale">
+        <section class="notice notice-default notice-secondary hidden" id="notice-locale">
 
             <div class="notice-body" dir="ltr">
 
@@ -138,8 +138,8 @@
                     Your preferred language is not yet fully supported.
 
                 </div>
-                
-                <a class="button button-notice" href="https://crowdin.com/project/decentraleyes" target="_blank">
+
+                <a class="button button-notice" id="button-help-translate" tabindex="0">
                     Help Translate
                 </a>
 

@@ -159,14 +159,14 @@ a {
     background-color: #fcfcfc;
     border-radius: 4px;
     border: 1px solid #e6e6e6;
-    color: #777;
+    color: #6d6d6d;
     font-size: 14px;
     margin-bottom: 20px;
     padding: 8px 11px;
 }
 
 .topic-label {
-    color: #5a8f79;
+    color: #4f7e6a;
     font-style: normal;
     font-weight: bold;
 }
@@ -187,11 +187,11 @@ a {
 }
 
 @media screen and (max-width: 550px) {
-    
+
     .btn {
         padding: 13px 18px 12px
     }
-    
+
     .btn-text {
         display: none
     }
