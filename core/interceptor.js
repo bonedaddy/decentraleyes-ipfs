@@ -258,6 +258,7 @@ interceptor.taintedDomains = {
     'jdnews.com': true,
     'journaldemocrat.com': true,
     'journalstandard.com': true,
+    'joyfulnoiserecordings.com': true,
     [`jp.span${'kb'}ang.com`]: true,
     'kinston.com': true,
     'kiowacountysignal.com': true,
