@@ -225,6 +225,7 @@ interceptor.taintedDomains = {
     'gctelegram.com': true,
     'gdt.oqlf.gouv.qc.ca': true,
     'geneseorepublic.com': true,
+    'globetrotter.de': true,
     'glowing-bear.org': true,
     'goerie.com': true,
     'goupstate.com': true,
